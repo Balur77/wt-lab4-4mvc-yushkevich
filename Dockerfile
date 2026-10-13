@@ -1,4 +1,3 @@
-```dockerfile
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
@@ -18,4 +17,3 @@ ENV PORT=10000
 EXPOSE 10000
 
 ENTRYPOINT ["dotnet", "wt-lab4-4mvc-yushkevich.dll"]
-```
