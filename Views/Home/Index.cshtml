@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<div class="container py-5">
+    <div class="row align-items-center g-5">
+        <div class="col-12 col-lg-7">
+            <span class="badge bg-primary-subtle text-primary mb-3">
+                Складская система
+            </span>
+
+            <h1 class="display-4 fw-bold mb-4">
+                Управляйте складом
+                <span class="text-primary">эффективно</span>
+            </h1>
+
+            <p class="lead text-secondary mb-4">
+                Единый каталог грузов для учёта количества,
+                веса, категорий и мест хранения.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3">
+                <a asp-controller="Cargo"
+                   asp-action="Index"
+                   class="btn btn-primary btn-lg shadow-sm">
+                    Открыть каталог
+                </a>
+
+                <a asp-controller="Cargo"
+                   asp-action="Create"
+                   class="btn btn-outline-primary btn-lg">
+                    Добавить груз
+                </a>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-5">
+            <div class="hero-panel rounded-5 p-4 p-md-5 shadow-sm">
+                <div class="display-1 mb-3">СКЛАД</div>
+                <h2 class="h3 fw-bold">Всё под контролем</h2>
+                <p class="mb-0 text-secondary">
+                    Просматривайте позиции, изменяйте данные
+                    и отслеживайте доступность грузов.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body p-4">
+                    <h2 class="h5 fw-bold">Каталог</h2>
+                    <p class="text-secondary mb-0">
+                        Просмотр всех складских позиций и их характеристик.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body p-4">
+                    <h2 class="h5 fw-bold">Редактирование</h2>
+                    <p class="text-secondary mb-0">
+                        Изменение сведений о грузе через веб-формы.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body p-4">
+                    <h2 class="h5 fw-bold">Контроль данных</h2>
+                    <p class="text-secondary mb-0">
+                        Проверка обязательных полей и допустимых значений.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

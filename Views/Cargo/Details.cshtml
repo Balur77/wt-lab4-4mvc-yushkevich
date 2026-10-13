@@ -1,0 +1,77 @@
+
+@model wt_lab4_4mvc_yushkevich.Models.Cargo
+
+@{
+    ViewData["Title"] = "Информация о грузе";
+}
+
+<div class="container py-5">
+    <div class="mb-4">
+        <a asp-action="Index" class="text-decoration-none">
+            ← Вернуться к каталогу
+        </a>
+    </div>
+
+    <div class="card border-0 shadow rounded-4 overflow-hidden">
+        <div class="bg-primary text-white p-4">
+            <span class="badge bg-light text-primary mb-2">
+                Груз № @Model.Id
+            </span>
+
+            <h1 class="display-6 fw-bold mb-2">@Model.Name</h1>
+            <p class="mb-0 opacity-75">@Model.Description</p>
+        </div>
+
+        <div class="card-body p-4">
+            <h2 class="h5 fw-bold mb-3">Характеристики груза</h2>
+
+            <dl class="row mb-4">
+                <dt class="col-sm-4 text-secondary">Идентификатор</dt>
+                <dd class="col-sm-8">@Model.Id</dd>
+
+                <dt class="col-sm-4 text-secondary">Название</dt>
+                <dd class="col-sm-8">@Model.Name</dd>
+
+                <dt class="col-sm-4 text-secondary">Категория</dt>
+                <dd class="col-sm-8">@Model.Category</dd>
+
+                <dt class="col-sm-4 text-secondary">Количество единиц</dt>
+                <dd class="col-sm-8">@Model.Quantity</dd>
+
+                <dt class="col-sm-4 text-secondary">Вес, кг</dt>
+                <dd class="col-sm-8">@Model.Weight.ToString("0.##")</dd>
+
+                <dt class="col-sm-4 text-secondary">Место хранения</dt>
+                <dd class="col-sm-8">@Model.Location</dd>
+
+                <dt class="col-sm-4 text-secondary">Описание</dt>
+                <dd class="col-sm-8">@Model.Description</dd>
+
+                <dt class="col-sm-4 text-secondary">Статус</dt>
+                <dd class="col-sm-8">
+                    @if (Model.IsAvailable)
+                    {
+                        <span class="badge bg-success">Доступен</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Недоступен</span>
+                    }
+                </dd>
+            </dl>
+
+            <div class="d-flex flex-wrap gap-2">
+                <a asp-action="Edit"
+                   asp-route-id="@Model.Id"
+                   class="btn btn-primary">
+                    Редактировать
+                </a>
+
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    Назад к списку
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

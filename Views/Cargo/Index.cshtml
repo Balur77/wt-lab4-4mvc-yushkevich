@@ -1,0 +1,137 @@
+
+@model List<wt_lab4_4mvc_yushkevich.Models.Cargo>
+
+@{
+    ViewData["Title"] = "Каталог грузов";
+}
+
+<div class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <span class="badge bg-primary mb-2">Управление складом</span>
+            <h1 class="display-6 fw-bold">Каталог грузов</h1>
+            <p class="text-secondary mb-0">
+                Учёт, размещение и контроль складских запасов
+            </p>
+        </div>
+
+        <a asp-action="Create" class="btn btn-primary btn-lg shadow-sm">
+            + Добавить груз
+        </a>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <div class="text-secondary small">Всего позиций</div>
+                    <div class="display-6 fw-bold">@Model.Count</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <div class="text-secondary small">Доступные позиции</div>
+                    <div class="display-6 fw-bold text-success">
+                        @Model.Count(c => c.IsAvailable)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <div class="text-secondary small">Категорий</div>
+                    <div class="display-6 fw-bold">
+                        @Model.Select(c => c.Category).Distinct().Count()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info rounded-4">
+            На складе пока нет грузов. Добавьте первую позицию.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var cargo in Model)
+            {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card cargo-card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-start gap-2 mb-3">
+                                <span class="badge bg-light text-dark border">
+                                    ID: @cargo.Id
+                                </span>
+
+                                @if (cargo.IsAvailable)
+                                {
+                                    <span class="badge bg-success">Доступен</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Недоступен</span>
+                                }
+                            </div>
+
+                            <h2 class="h4 fw-bold">@cargo.Name</h2>
+
+                            <p class="text-secondary mb-3">@cargo.Description</p>
+
+                            <div class="mb-2">
+                                <span class="text-secondary">Категория:</span>
+                                <span class="fw-semibold">@cargo.Category</span>
+                            </div>
+
+                            <div class="mb-2">
+                                <span class="text-secondary">Количество:</span>
+                                <span class="fw-semibold">@cargo.Quantity</span>
+                            </div>
+
+                            <div class="mb-2">
+                                <span class="text-secondary">Вес:</span>
+                                <span class="fw-semibold">@cargo.Weight.ToString("0.##") кг</span>
+                            </div>
+
+                            <div class="mb-4">
+                                <span class="text-secondary">Сектор:</span>
+                                <span class="fw-semibold">@cargo.Location</span>
+                            </div>
+
+                            <div class="mt-auto d-flex flex-wrap gap-2">
+                                <a asp-action="Details"
+                                   asp-route-id="@cargo.Id"
+                                   class="btn btn-outline-primary flex-grow-1">
+                                    Подробнее
+                                </a>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@cargo.Id"
+                                   class="btn btn-outline-secondary">
+                                    Изменить
+                                </a>
+
+                                <form asp-action="Delete"
+                                      asp-route-id="@cargo.Id"
+                                      method="post"
+                                      onsubmit="return confirm('Удалить этот груз?');">
+                                    <button type="submit" class="btn btn-outline-danger">
+                                        Удалить
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
